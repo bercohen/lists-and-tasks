@@ -10,6 +10,8 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'nested_form_fields'
+gem 'devise'
+gem 'audited', '~> 4.5'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

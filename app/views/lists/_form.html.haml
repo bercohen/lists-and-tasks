@@ -12,7 +12,7 @@
   =f.nested_fields_for :list_items do |list_item|
     %li
       =list_item.label  "Item"
-      = list_item.text_field :description
+      = list_item.text_field :description, :required => true
       = list_item.remove_nested_fields_link
   = f.add_nested_fields_link :list_items do
     %button New item

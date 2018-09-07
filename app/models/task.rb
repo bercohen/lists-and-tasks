@@ -1,12 +1,16 @@
 class Task < ActiveRecord::Base
   validates :name, presence: true
 
-    def self.completed
-      all.select { |task| task.completed }
-    end
+  belongs_to :user
 
-    def self.not_completed
-      all.select { |task| !task.completed }
-    end
+  audited
+
+  def self.completed
+    all.select { |task| task.completed }
+  end
+
+  def self.not_completed
+    all.select { |task| !task.completed }
+  end
 
 end

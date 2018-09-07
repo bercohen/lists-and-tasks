@@ -1,18 +1,19 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks.all
   end
 
   def completed
-    @tasks = Task.completed
+    @tasks = current_user.tasks.completed
   end
 
   def not_completed
-    @tasks = Task.not_completed
+    @tasks = current_user.tasks.not_completed
   end
 
   # GET /tasks/1
@@ -32,7 +33,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save
