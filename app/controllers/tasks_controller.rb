@@ -35,29 +35,27 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+    create_update(@task.save, 'created', new)
   end
 
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    create_update(@task.update(task_params),'updated', edit)
+  end
+
+  def create_update(call, string, rendering)
+
     respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
+      if call
+        format.html { redirect_to tasks_path, notice: "Task was successfully #{string}." }
+        format.json { render :show, status: :created, location: @task }
       else
-        format.html { render :edit }
+        format.html { render :rendering }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /tasks/1
