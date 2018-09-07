@@ -26,3 +26,4 @@ User stories to implement
 Cleanup tasks
 ----------------
 - Consolidate the repeated code between the create and edit feature specs for tasks.
+- [BC: For this I created a simple `create_update` function containing the repeat code and passed in the small difference as an argument]
